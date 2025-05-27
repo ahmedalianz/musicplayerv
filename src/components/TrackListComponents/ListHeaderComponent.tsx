@@ -150,7 +150,7 @@ const styles = StyleSheet.create({
     color: Colors.text,
     borderRadius: 14,
     paddingHorizontal: 12,
-    paddingVertical: 10,
+    paddingVertical: 5,
     fontSize: 16,
     flexGrow: 1,
   },

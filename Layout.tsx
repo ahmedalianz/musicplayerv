@@ -21,6 +21,7 @@ const Layout = () => {
 
   return (
     <Tab.Navigator
+      initialRouteName="Songs"
       screenOptions={{
         ...options,
         headerShown: false,
