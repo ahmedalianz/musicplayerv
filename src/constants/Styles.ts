@@ -31,16 +31,16 @@ const styles = {
   emptyContentText: {
     fontSize: 20,
     color: '#9ca3af',
-    textAlign: 'center',
+    textAlign: 'center' as 'center',
     marginTop: 20,
   },
   emptyContentImage: {
     width: 200,
     height: 200,
-    alignSelf: 'center',
+    alignSelf: 'center' as 'center',
     marginTop: 40,
     opacity: 0.3,
   },
-  flatLstBottom: {paddingBottom: 160},
+  flatLstBottom: {paddingBottom: 280},
 };
 export default styles;

@@ -3,7 +3,7 @@ import {Styles} from '@/constants';
 import {trackTitleFilter} from '@/utils/filters';
 import React, {useMemo, useState} from 'react';
 import {View} from 'react-native';
-import library from '../../../assets/data/library.json';
+import library from '../../assets/data/library.json';
 
 const Songs = () => {
   const [searchQuery, setSearchQuery] = useState('');

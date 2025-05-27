@@ -1,4 +1,5 @@
-export {default as Songs} from './Songs/Songs';
-export {default as Favorites} from './Favorites/Favorites';
-export {default as Artists} from './Artists/Artists';
-export {default as Playlists} from './Playlists/Playlists';
+export {default as Songs} from './Songs';
+export {default as Favorites} from './Favorites';
+export {default as Artists} from './Artists';
+export {default as Playlists} from './Playlists';
+export {default as Player} from './Player';

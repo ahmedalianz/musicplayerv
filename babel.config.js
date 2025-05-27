@@ -20,6 +20,7 @@ module.exports = {
           '@': './src',
           '@components': './src/components',
           '@constants': './src/constants',
+          '@hooks': './src/hooks',
         },
       },
     ],

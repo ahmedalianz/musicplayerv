@@ -1,15 +1,18 @@
-import {Styles} from '@/constants';
+import {Images, Styles} from '@/constants';
 import React, {useRef} from 'react';
-import {FlatList, View} from 'react-native';
+import {FlatList, Text, View} from 'react-native';
 import Animated, {
   useAnimatedScrollHandler,
   useSharedValue,
 } from 'react-native-reanimated';
-import ItemSeparatorComponent from './TrackListComponents/ItemSeparatorComponent';
-import ListHeaderComponent from './TrackListComponents/ListHeaderComponent';
+import {
+  ItemSeparatorComponent,
+  ListEmptyComponent,
+  ListHeaderComponent,
+} from './TrackListComponents';
 import TrackListItem from './TrackListItem';
 import {TracksListProps} from '@/types/TracksList.types';
-import {Track} from 'react-native-track-player';
+import TrackPlayer, {Track} from 'react-native-track-player';
 type MergedTracksListProps = TracksListProps & {filteredTracks: Track[]};
 const TracksList = ({
   searchQuery,
@@ -19,7 +22,13 @@ const TracksList = ({
   const ITEM_HEIGHT = 50;
 
   const renderItem = ({item}: {item: any}) => (
-    <TrackListItem track={item} onTrackSelect={() => {}} />
+    <TrackListItem
+      track={item}
+      onTrackSelect={async (track: Track) => {
+        await TrackPlayer.load(track);
+        await TrackPlayer.play();
+      }}
+    />
   );
 
   const scrollY = useSharedValue(0);
@@ -38,8 +47,9 @@ const TracksList = ({
         ref={flatListRef}
         data={filteredTracks}
         renderItem={renderItem}
-        keyExtractor={item => item.url}
         ItemSeparatorComponent={ItemSeparatorComponent}
+        ListEmptyComponent={ListEmptyComponent}
+        keyExtractor={item => item.url}
         getItemLayout={(_, index) => ({
           length: ITEM_HEIGHT,
           offset: ITEM_HEIGHT * index,

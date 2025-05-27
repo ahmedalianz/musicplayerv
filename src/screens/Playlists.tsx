@@ -1,12 +1,9 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
+import Player from './Player';
 
 const Playlists = () => {
-  return (
-    <View>
-      <Text>Playlists</Text>
-    </View>
-  );
+  return <Player />;
 };
 
 export default Playlists;

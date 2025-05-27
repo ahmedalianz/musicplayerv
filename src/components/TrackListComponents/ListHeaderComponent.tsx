@@ -20,6 +20,7 @@ import Animated, {
   SharedValue,
   useAnimatedStyle,
 } from 'react-native-reanimated';
+import Icon from 'react-native-vector-icons/Ionicons';
 type ListHeaderComponentProps = {
   scrollY: SharedValue<number>;
 } & TracksListProps;
@@ -95,6 +96,12 @@ const ListHeaderComponent = ({
         </Animated.View>
       )}
       <Animated.View style={[styles.searchContainer, searchBarStyle]}>
+        <Icon
+          name="search"
+          size={16}
+          color={Colors.placeholder}
+          style={styles.searchIcon}
+        />
         <TextInput
           key={'search-input'}
           style={styles.searchInput}
@@ -106,6 +113,7 @@ const ListHeaderComponent = ({
           onFocus={() => setSearchFocused(true)}
           onBlur={() => setSearchFocused(false)}
           ref={inputRef}
+          onSubmitEditing={() => Keyboard.dismiss()}
         />
         {searchFocused && (
           <Animated.View
@@ -150,9 +158,15 @@ const styles = StyleSheet.create({
     color: Colors.text,
     borderRadius: 14,
     paddingHorizontal: 12,
+    paddingStart: 30,
     paddingVertical: 5,
     fontSize: 16,
     flexGrow: 1,
+  },
+  searchIcon: {
+    position: 'absolute',
+    left: 12,
+    top: 10,
   },
 });
 export default ListHeaderComponent;

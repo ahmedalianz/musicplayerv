@@ -2,12 +2,16 @@ import {Colors, Styles, FontSize, Images} from '@/constants';
 import {TracksListItemProps} from '@/types/TracksList.types';
 import {StyleSheet, Text, TouchableHighlight, View} from 'react-native';
 import FastImage from 'react-native-fast-image';
-
+import {useActiveTrack, useIsPlaying} from 'react-native-track-player';
+import Icon from 'react-native-vector-icons/Entypo';
+import IonIcon from 'react-native-vector-icons/Ionicons';
+import LoaderKit from 'react-native-loader-kit';
 const TracksListItem = ({
   track,
   onTrackSelect: handleTrackSelect,
 }: TracksListItemProps) => {
-  const isActiveTrack = false;
+  const {playing} = useIsPlaying();
+  const isActiveTrack = useActiveTrack()?.url === track.url;
   return (
     <TouchableHighlight
       onPress={() => handleTrackSelect(track)}
@@ -25,6 +29,21 @@ const TracksListItem = ({
           }}
         />
 
+        {isActiveTrack &&
+          (playing ? (
+            <LoaderKit
+              style={styles.trackPlayingIconIndicator}
+              color={Colors.icon}
+              name="LineScaleParty"
+            />
+          ) : (
+            <IonIcon
+              name="play"
+              size={24}
+              color={Colors.icon}
+              style={styles.trackPausedIndicator}
+            />
+          ))}
         <View style={styles.trackInfoContainer}>
           <View style={{width: '100%'}}>
             <Text
@@ -43,6 +62,8 @@ const TracksListItem = ({
             )}
           </View>
         </View>
+
+        <Icon name="dots-three-horizontal" size={18} color={Colors.icon} />
       </View>
     </TouchableHighlight>
   );
