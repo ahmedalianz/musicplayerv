@@ -3,9 +3,10 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import {Colors, FontSize} from './src/constants';
 import {Artists, Favorites, MusicPlayer, Playlists, Songs} from './src/screens';
 import {FloatingPlayer} from './src/components';
-import {StyleSheet} from 'react-native';
+import {Platform, StyleSheet} from 'react-native';
 import {useActiveTrack} from 'react-native-track-player';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {TransitionPresets} from '@react-navigation/stack';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -77,9 +78,31 @@ const Layout = () => {
   );
 };
 const RootLayout = () => (
-  <Stack.Navigator>
+  <Stack.Navigator screenOptions={{headerShown: false}}>
     <Stack.Screen name="Layout" component={Layout} />
-    <Stack.Screen name="MusicPlayer" component={MusicPlayer} />
+    <Stack.Screen
+      name="MusicPlayer"
+      component={MusicPlayer}
+      options={{
+        headerShown: false,
+        gestureEnabled: true,
+        gestureDirection: 'vertical',
+        presentation: 'card',
+        ...Platform.select({
+          ios: {
+            animationDuration: 400,
+          },
+          android: {
+            // presentation: 'transparentModal', // Better for Android
+            animation: 'slide_from_bottom', // Available in react-native-screens 3.9+
+            animationDuration: 250,
+            // Android-specific configs:
+            cardOverlayEnabled: true,
+            cardShadowEnabled: true,
+          },
+        }),
+      }}
+    />
   </Stack.Navigator>
 );
 

@@ -4,6 +4,7 @@ import {StatusBar, useColorScheme} from 'react-native';
 import RootLayout from './Layout';
 import {useSetupTrackPlayer} from './src/hooks';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
+import {GestureHandlerRootView} from 'react-native-gesture-handler';
 
 function App(): JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
@@ -11,10 +12,12 @@ function App(): JSX.Element {
   useSetupTrackPlayer({onLoad: () => setLoading(false)});
   return (
     <SafeAreaProvider>
-      <NavigationContainer>
-        <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-        <RootLayout />
-      </NavigationContainer>
+      <GestureHandlerRootView style={{flex: 1}}>
+        <NavigationContainer>
+          <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
+          <RootLayout />
+        </NavigationContainer>
+      </GestureHandlerRootView>
     </SafeAreaProvider>
   );
 }

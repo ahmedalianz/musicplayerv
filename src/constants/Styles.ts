@@ -15,9 +15,9 @@ const styles = {
     color: '#fc3c44',
   },
   centeredRow: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
+    flexDirection: 'row' as 'row',
+    justifyContent: 'center' as 'center',
+    alignItems: 'center' as 'center',
   },
   slider: {
     height: 7,

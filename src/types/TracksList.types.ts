@@ -8,3 +8,11 @@ export type TracksListProps = {
   searchQuery: string;
   setSearchQuery: (searchQuery: string) => void;
 };
+export type Playlist = {
+  name: string;
+  tracks: Track[];
+  artworkPreview: string;
+};
+export type TrackWithPlaylist = Track & {
+  playlist?: string[];
+};

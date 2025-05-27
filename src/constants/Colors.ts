@@ -1,6 +1,7 @@
 const colors = {
   primary: '#fc3c44',
   background: '#000',
+  lightBackground: 'rgba(0,0,0,0.5)',
   text: '#fff',
   textMuted: '#9ca3af',
   icon: '#fff',
