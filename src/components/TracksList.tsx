@@ -1,18 +1,18 @@
-import {Images, Styles} from '@/constants';
+import {Styles} from '@/constants';
+import {TracksListProps} from '@/types/TracksList.types';
 import React, {useRef} from 'react';
-import {FlatList, Text, View} from 'react-native';
+import {FlatList, View} from 'react-native';
 import Animated, {
   useAnimatedScrollHandler,
   useSharedValue,
 } from 'react-native-reanimated';
+import TrackPlayer, {Track} from 'react-native-track-player';
 import {
   ItemSeparatorComponent,
   ListEmptyComponent,
   ListHeaderComponent,
 } from './TrackListComponents';
 import TrackListItem from './TrackListItem';
-import {TracksListProps} from '@/types/TracksList.types';
-import TrackPlayer, {Track} from 'react-native-track-player';
 type MergedTracksListProps = TracksListProps & {filteredTracks: Track[]};
 const TracksList = ({
   searchQuery,

@@ -9,7 +9,7 @@ import MovingText from './MovingText';
 import {useLastActiveTrack} from '@/hooks';
 
 const FloatingPlayer = ({style}: ViewProps) => {
-  const navigation = useNavigation();
+  const navigation = useNavigation<any>();
 
   const activeTrack = useActiveTrack();
   const lastActiveTrack = useLastActiveTrack();
@@ -17,7 +17,7 @@ const FloatingPlayer = ({style}: ViewProps) => {
   const displayedTrack = activeTrack ?? lastActiveTrack;
 
   const handlePress = () => {
-    // navigation.navigate('/player')
+    navigation.navigate('MusicPlayer');
   };
 
   if (!displayedTrack) return null;

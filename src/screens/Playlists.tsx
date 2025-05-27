@@ -1,9 +1,8 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import React from 'react';
-import Player from './Player';
 
 const Playlists = () => {
-  return <Player />;
+  return <View />;
 };
 
 export default Playlists;

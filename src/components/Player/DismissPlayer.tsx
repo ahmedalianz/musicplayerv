@@ -1,4 +1,4 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import React from 'react';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
@@ -6,7 +6,7 @@ const DismissPlayer = () => {
   const {top} = useSafeAreaInsets();
   return (
     <View style={[styles.container, {top: top + 8}]}>
-      <View accessible={false} style={styles.ss} />
+      <View accessible={false} style={styles.indicator} />
     </View>
   );
 };
@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
   },
-  ss: {
+  indicator: {
     width: 50,
     height: 8,
     borderRadius: 8,

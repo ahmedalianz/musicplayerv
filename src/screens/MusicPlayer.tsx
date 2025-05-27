@@ -1,9 +1,9 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import React from 'react';
 import {Styles} from '@/constants';
 import {DismissPlayer} from '@/components';
 
-const Player = () => {
+const MusicPlayer = () => {
   return (
     <View style={styles.overlayContainer}>
       <DismissPlayer />
@@ -11,7 +11,7 @@ const Player = () => {
   );
 };
 
-export default Player;
+export default MusicPlayer;
 
 const styles = StyleSheet.create({
   overlayContainer: {

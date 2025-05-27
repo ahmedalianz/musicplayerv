@@ -1,7 +1,7 @@
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {Colors, FontSize} from './src/constants';
-import {Artists, Favorites, Player, Playlists, Songs} from './src/screens';
+import {Artists, Favorites, MusicPlayer, Playlists, Songs} from './src/screens';
 import {FloatingPlayer} from './src/components';
 import {StyleSheet} from 'react-native';
 import {useActiveTrack} from 'react-native-track-player';
@@ -12,14 +12,6 @@ const Stack = createNativeStackNavigator();
 const getTabBarIcon = (focused: boolean, name: string) => (
   <Icon color={focused ? Colors.primary : Colors.text} name={name} size={24} />
 );
-const RootLayout = () => {
-  return (
-    <Stack.Navigator>
-      <Stack.Screen name="Layout" component={Layout} />
-      <Stack.Screen name="Player" component={Player} />
-    </Stack.Navigator>
-  );
-};
 const Layout = () => {
   const options = {
     tabBarActiveTintColor: Colors.primary,
@@ -84,6 +76,12 @@ const Layout = () => {
     </>
   );
 };
+const RootLayout = () => (
+  <Stack.Navigator>
+    <Stack.Screen name="Layout" component={Layout} />
+    <Stack.Screen name="MusicPlayer" component={MusicPlayer} />
+  </Stack.Navigator>
+);
 
 export default RootLayout;
 const styles = StyleSheet.create({
