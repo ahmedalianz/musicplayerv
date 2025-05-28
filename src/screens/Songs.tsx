@@ -3,15 +3,14 @@ import {Styles} from '@/constants';
 import {trackTitleFilter} from '@/utils/filters';
 import React, {useMemo, useState} from 'react';
 import {View} from 'react-native';
-import {useTracks} from '@/store/useLibraryStore';
-
+import {useTracks} from '@/store/selectors';
 const Songs = () => {
+  const {tracks} = useTracks();
   const [searchQuery, setSearchQuery] = useState('');
-  const library = useTracks();
   const filteredTracks = useMemo(() => {
-    if (!searchQuery) return library;
+    if (!searchQuery) return tracks;
 
-    return library.filter(trackTitleFilter(searchQuery));
+    return tracks.filter(trackTitleFilter(searchQuery));
   }, [searchQuery]);
   return (
     <View style={Styles.container}>

@@ -1,9 +1,9 @@
 import {TracksList} from '@/components';
 import {Styles} from '@/constants';
+import {useFavorites} from '@/store/selectors';
 import {trackTitleFilter} from '@/utils/filters';
 import React, {useMemo, useState} from 'react';
 import {View} from 'react-native';
-import {useFavorites} from '@/store/useLibraryStore';
 
 const Favorites = () => {
   const [searchQuery, setSearchQuery] = useState('');
