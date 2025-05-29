@@ -30,9 +30,7 @@ const MusicPlayer = () => {
             <FastImage
               key={activeTrack?.artwork ?? Images.unknownTrack}
               source={{
-                uri:
-                  activeTrack?.artwork ??
-                  Image.resolveAssetSource(Images.unknownTrack)?.uri,
+                uri: activeTrack?.artwork ?? Images.unknownTrack,
                 priority: FastImage.priority.high,
               }}
               resizeMode="cover"

@@ -7,12 +7,13 @@ import {useActiveTrack} from 'react-native-track-player';
 import {PlayPauseButton, SkipButton} from './PlayerControls';
 import MovingText from './MovingText';
 import {useLastActiveTrack} from '@/hooks';
+import {InScreenNavigation} from '@/types/Navigation.types';
 
 const FloatingPlayer = ({style}: ViewProps) => {
-  const navigation = useNavigation<any>();
+  const navigation = useNavigation<InScreenNavigation>();
 
   const activeTrack = useActiveTrack();
-  const lastActiveTrack = useLastActiveTrack();
+  const {lastActiveTrack} = useLastActiveTrack();
 
   const displayedTrack = activeTrack ?? lastActiveTrack;
 
@@ -29,7 +30,7 @@ const FloatingPlayer = ({style}: ViewProps) => {
       <>
         <FastImage
           source={{
-            uri: displayedTrack.artwork ?? Images.unknownTrack,
+            uri: displayedTrack?.artwork ?? Images.unknownTrack,
           }}
           style={styles.trackArtworkImage}
         />

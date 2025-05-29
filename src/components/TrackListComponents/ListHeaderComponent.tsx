@@ -1,5 +1,6 @@
 import {Colors, Styles} from '@/constants';
-import {TracksListProps} from '@/types/TracksList.types';
+import {useTracksActions} from '@/store/selectors';
+import {TracksListSearchProps} from '@/types/TracksList.types';
 import React, {useState} from 'react';
 import {
   Keyboard,
@@ -21,14 +22,22 @@ import Animated, {
   useAnimatedStyle,
 } from 'react-native-reanimated';
 import Icon from 'react-native-vector-icons/Ionicons';
+import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
+
 type ListHeaderComponentProps = {
   scrollY: SharedValue<number>;
-} & TracksListProps;
+  title?: string;
+  headerCustomStyle?: ViewStyle;
+} & TracksListSearchProps;
 const ListHeaderComponent = ({
   scrollY,
+  title,
   searchQuery,
   setSearchQuery,
+  headerCustomStyle,
 }: ListHeaderComponentProps) => {
+  const {fetchDeviceTracks} = useTracksActions();
+
   const ITEM_HEIGHT = 50;
   const SCROLL_THRESHOLD = 3 * (ITEM_HEIGHT + 10);
   const [searchFocused, setSearchFocused] = useState(false);
@@ -84,15 +93,27 @@ const ListHeaderComponent = ({
   }));
   const transition = CurvedTransition.delay(100);
   const inputRef = React.useRef<TextInput>(null);
+  const refetchSongs = () => {
+    fetchDeviceTracks();
+  };
   return (
-    <Animated.View style={styles.headerContainer} layout={transition}>
-      {!searchFocused && (
-        <Animated.View style={headerContainerStyle}>
+    <Animated.View
+      style={[styles.headerContainer, headerCustomStyle]}
+      layout={transition}>
+      {!searchFocused && title && (
+        <Animated.View style={[styles.header, headerContainerStyle]}>
           <Animated.Text
             entering={FadeInUp.delay(100)}
             style={[styles.text, headerStyle]}>
-            Songs
+            {title}
           </Animated.Text>
+          <MaterialCommunityIcon
+            style={{padding: 5}}
+            onPress={refetchSongs}
+            name="refresh"
+            size={20}
+            color={Colors.icon}
+          />
         </Animated.View>
       )}
       <Animated.View style={[styles.searchContainer, searchBarStyle]}>
@@ -142,6 +163,11 @@ const styles = StyleSheet.create({
     paddingVertical: 16,
     backgroundColor: Colors.background,
     overflow: 'hidden',
+  },
+  header: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
   },
   text: {
     fontSize: 30,

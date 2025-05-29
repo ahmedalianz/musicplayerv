@@ -4,3 +4,6 @@ export {default as DismissPlayer} from './Player/DismissPlayer';
 export {default as PlayerProgressbar} from './Player/PlayerProgressbar';
 export {default as PlayerVolumeBar} from './Player/PlayerVolumeBar';
 export {default as PlayerRepeatToggle} from './Player/PlayerRepeatToggle';
+export {default as PlaylistListItem} from './PlaylistListItem';
+export {default as ArtistTracksList} from './ArtistTracksList';
+export {default as PlaylistTracksList} from './PlaylistTracksList';

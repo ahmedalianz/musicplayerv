@@ -1,11 +1,18 @@
 import {Colors, Styles, FontSize, Images} from '@/constants';
 import {TracksListItemProps} from '@/types/TracksList.types';
-import {StyleSheet, Text, TouchableHighlight, View} from 'react-native';
+import {
+  Pressable,
+  StyleSheet,
+  Text,
+  TouchableHighlight,
+  View,
+} from 'react-native';
 import FastImage from 'react-native-fast-image';
 import {useActiveTrack, useIsPlaying} from 'react-native-track-player';
 import Icon from 'react-native-vector-icons/Entypo';
 import IonIcon from 'react-native-vector-icons/Ionicons';
 import LoaderKit from 'react-native-loader-kit';
+import {TrackShortcutsMenu} from './TrackListComponents';
 const TracksListItem = ({
   track,
   onTrackSelect: handleTrackSelect,
@@ -13,67 +20,80 @@ const TracksListItem = ({
   const {playing} = useIsPlaying();
   const isActiveTrack = useActiveTrack()?.url === track.url;
   return (
-    <TouchableHighlight
-      onPress={() => handleTrackSelect(track)}
-      accessibilityLabel={`Play ${track.title}`}
-      accessibilityRole="button">
-      <View style={styles.trackItemContainer}>
-        <FastImage
-          source={{
-            uri: track.artwork ?? Images.unknownTrack,
-            priority: FastImage.priority.normal,
-          }}
-          style={{
-            ...styles.trackArtworkImage,
-            opacity: isActiveTrack ? 0.6 : 1,
-          }}
-        />
+    <View style={styles.trackItemContainer}>
+      <TouchableHighlight
+        style={{flex: 1}}
+        onPress={() => handleTrackSelect(track)}
+        accessibilityLabel={`Play ${track.title}`}
+        accessibilityRole="button">
+        <View style={styles.trackItemButton}>
+          <FastImage
+            source={{
+              uri: track.artwork ?? Images.unknownTrack,
+              priority: FastImage.priority.normal,
+            }}
+            style={{
+              ...styles.trackArtworkImage,
+              opacity: isActiveTrack ? 0.6 : 1,
+            }}
+          />
 
-        {isActiveTrack &&
-          (playing ? (
-            <LoaderKit
-              style={styles.trackPlayingIconIndicator}
-              color={Colors.icon}
-              name="LineScaleParty"
-            />
-          ) : (
-            <IonIcon
-              name="play"
-              size={24}
-              color={Colors.icon}
-              style={styles.trackPausedIndicator}
-            />
-          ))}
-        <View style={styles.trackInfoContainer}>
-          <View style={{width: '100%'}}>
-            <Text
-              numberOfLines={1}
-              style={{
-                ...styles.trackTitleText,
-                color: isActiveTrack ? Colors.primary : Colors.text,
-              }}>
-              {track.title}
-            </Text>
-
-            {track.artist && (
-              <Text numberOfLines={1} style={styles.trackArtistText}>
-                {track.artist}
+          {isActiveTrack &&
+            (playing ? (
+              <LoaderKit
+                style={styles.trackPlayingIconIndicator}
+                color={Colors.icon}
+                name="LineScaleParty"
+              />
+            ) : (
+              <IonIcon
+                name="play"
+                size={24}
+                color={Colors.icon}
+                style={styles.trackPausedIndicator}
+              />
+            ))}
+          <View style={styles.trackInfoContainer}>
+            <View style={{width: '100%'}}>
+              <Text
+                numberOfLines={1}
+                style={{
+                  ...styles.trackTitleText,
+                  color: isActiveTrack ? Colors.primary : Colors.text,
+                }}>
+                {track.title}
               </Text>
-            )}
+
+              {track.artist && (
+                <Text numberOfLines={1} style={styles.trackArtistText}>
+                  {track.artist}
+                </Text>
+              )}
+            </View>
           </View>
         </View>
-
-        <Icon name="dots-three-horizontal" size={18} color={Colors.icon} />
+      </TouchableHighlight>
+      <View
+        style={{
+          paddingHorizontal: 5,
+        }}>
+        <TrackShortcutsMenu track={track}>
+          <Icon name="dots-three-horizontal" size={18} color={Colors.icon} />
+        </TrackShortcutsMenu>
       </View>
-    </TouchableHighlight>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
   trackItemContainer: {
     flexDirection: 'row',
-    columnGap: 14,
+    justifyContent: 'space-between',
     alignItems: 'center',
+  },
+  trackItemButton: {
+    columnGap: 14,
+    flexDirection: 'row',
     paddingRight: 20,
   },
   trackPlayingIconIndicator: {

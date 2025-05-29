@@ -1,11 +1,11 @@
 import {Colors, Styles} from '@/constants';
 import {useTrackPlayerVolume} from '@/hooks';
 import React from 'react';
-import {View} from 'react-native';
+import {View, ViewStyle} from 'react-native';
 import {Slider} from 'react-native-awesome-slider';
 import {useSharedValue} from 'react-native-reanimated';
 import Icon from 'react-native-vector-icons/Ionicons';
-const PlayerVolumeBar = ({style}: any) => {
+const PlayerVolumeBar = ({style}: {style: ViewStyle}) => {
   const {volume, updateVolume} = useTrackPlayerVolume();
 
   const progress = useSharedValue(0);

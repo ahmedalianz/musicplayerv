@@ -1,12 +1,20 @@
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {Colors, FontSize} from './src/constants';
-import {Artists, Favorites, MusicPlayer, Playlists, Songs} from './src/screens';
+import {
+  AddToPlaylist,
+  Artist,
+  Artists,
+  Favorites,
+  MusicPlayer,
+  Playlist,
+  Playlists,
+  Songs,
+} from './src/screens';
 import {FloatingPlayer} from './src/components';
 import {Platform, StyleSheet} from 'react-native';
 import {useActiveTrack} from 'react-native-track-player';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {TransitionPresets} from '@react-navigation/stack';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -80,6 +88,30 @@ const Layout = () => {
 const RootLayout = () => (
   <Stack.Navigator screenOptions={{headerShown: false}}>
     <Stack.Screen name="Layout" component={Layout} />
+    <Stack.Screen name="Artist" component={Artist} />
+    <Stack.Screen name="Playlist" component={Playlist} />
+    <Stack.Screen
+      name="AddToPlaylist"
+      component={AddToPlaylist}
+      options={{
+        headerShown: false,
+        gestureEnabled: true,
+        gestureDirection: 'vertical',
+        presentation: 'modal',
+        ...Platform.select({
+          ios: {
+            animationDuration: 400,
+          },
+          android: {
+            animation: 'slide_from_bottom',
+            animationDuration: 250,
+            // Android-specific configs:
+            cardOverlayEnabled: true,
+            cardShadowEnabled: true,
+          },
+        }),
+      }}
+    />
     <Stack.Screen
       name="MusicPlayer"
       component={MusicPlayer}
@@ -87,14 +119,14 @@ const RootLayout = () => (
         headerShown: false,
         gestureEnabled: true,
         gestureDirection: 'vertical',
-        presentation: 'card',
         ...Platform.select({
           ios: {
+            presentation: 'card',
             animationDuration: 400,
           },
           android: {
-            // presentation: 'transparentModal', // Better for Android
-            animation: 'slide_from_bottom', // Available in react-native-screens 3.9+
+            presentation: 'transparentModal', // Better for Android
+            animation: 'slide_from_bottom',
             animationDuration: 250,
             // Android-specific configs:
             cardOverlayEnabled: true,

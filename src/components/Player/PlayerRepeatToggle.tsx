@@ -1,7 +1,7 @@
 import {Colors, FontSize} from '@/constants';
 import {useTrackPlayerRepeat} from '@/hooks';
 import React from 'react';
-import {StyleSheet, View} from 'react-native';
+import {StyleSheet, View, ViewStyle} from 'react-native';
 import {RepeatMode} from 'react-native-track-player';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 const repeatOrder: Record<string, RepeatMode> = {
@@ -14,7 +14,13 @@ const repeatIcon: Record<string, string> = {
   1: 'repeat-once',
   2: 'repeat',
 };
-const PlayerRepeatToggle = ({style, size}: any) => {
+const PlayerRepeatToggle = ({
+  style,
+  size,
+}: {
+  style: ViewStyle;
+  size: number;
+}) => {
   const {repeatMode, changeRepeatMode} = useTrackPlayerRepeat();
   const toggleRepeatMode = () => {
     if (repeatMode === repeatOrder.Off) {
