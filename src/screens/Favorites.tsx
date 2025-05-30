@@ -12,7 +12,7 @@ const Favorites = () => {
   const filteredTracks = useMemo(() => {
     if (!searchQuery) return favorites;
     return favorites.filter(trackTitleFilter(searchQuery));
-  }, [searchQuery]);
+  }, [searchQuery, favorites]);
   return (
     <View style={Styles.container}>
       <TracksList
@@ -20,6 +20,7 @@ const Favorites = () => {
         tracks={filteredTracks}
         id={generateTracksListId('Favorites', searchQuery)}
         title="Favorites"
+        hideQueueControls={false}
       />
     </View>
   );

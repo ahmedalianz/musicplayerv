@@ -9,7 +9,7 @@ import {usePlaylists} from '@/store/selectors';
 import {Playlist} from '@/types/TracksList.types';
 import {playlistNameFilter} from '@/utils/filters';
 import React, {useMemo, useRef, useState} from 'react';
-import {FlatList, StyleSheet, View} from 'react-native';
+import {FlatList, View} from 'react-native';
 import Animated, {
   useAnimatedScrollHandler,
   useSharedValue,
@@ -60,5 +60,3 @@ const Playlists = () => {
 };
 
 export default Playlists;
-
-const styles = StyleSheet.create({});

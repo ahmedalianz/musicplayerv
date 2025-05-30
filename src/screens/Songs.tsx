@@ -11,7 +11,7 @@ const Songs = () => {
   const filteredTracks = useMemo(() => {
     if (!searchQuery) return tracks;
     return tracks.filter(trackTitleFilter(searchQuery));
-  }, [searchQuery]);
+  }, [searchQuery, tracks]);
 
   return (
     <View style={Styles.container}>
