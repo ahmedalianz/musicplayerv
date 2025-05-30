@@ -2,7 +2,6 @@ import {Colors, FontSize, Images, Styles} from '@/constants';
 import {TracksListItemProps} from '@/types/TracksList.types';
 import {StyleSheet, Text, TouchableHighlight, View} from 'react-native';
 import FastImage from 'react-native-fast-image';
-import LoaderKit from 'react-native-loader-kit';
 import {useActiveTrack, useIsPlaying} from 'react-native-track-player';
 // import Icon from 'react-native-vector-icons/Entypo';
 import IonIcon from 'react-native-vector-icons/Ionicons';
@@ -35,10 +34,12 @@ const TracksListItem = ({
 
           {isActiveTrack &&
             (playing ? (
-              <LoaderKit
+              <FastImage
+                source={{
+                  uri: Images.playing,
+                  priority: FastImage.priority.high,
+                }}
                 style={styles.trackPlayingIconIndicator}
-                color={Colors.icon}
-                name="LineScaleParty"
               />
             ) : (
               <IonIcon
@@ -93,10 +94,8 @@ const styles = StyleSheet.create({
   },
   trackPlayingIconIndicator: {
     position: 'absolute',
-    top: 18,
-    left: 16,
-    width: 16,
-    height: 16,
+    width: 50,
+    height: 50,
   },
   trackPausedIndicator: {
     position: 'absolute',

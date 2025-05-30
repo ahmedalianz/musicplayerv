@@ -4,12 +4,12 @@ import {
   PlayerControlsProps,
   SkipButtonProps,
 } from '@/types/PlayerControls.types';
-import React from 'react';
+import React, {memo} from 'react';
 import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import TrackPlayer, {useIsPlaying} from 'react-native-track-player';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-export const PlayPauseButton = ({style, iconSize}: PlayerButtonProps) => {
+export const PlayPauseButton = memo(({style, iconSize}: PlayerButtonProps) => {
   const {playing} = useIsPlaying();
   return (
     <View style={[{height: iconSize}, style]}>
@@ -24,8 +24,8 @@ export const PlayPauseButton = ({style, iconSize}: PlayerButtonProps) => {
       </TouchableOpacity>
     </View>
   );
-};
-export const SkipButton = ({type, iconSize = 30}: SkipButtonProps) => {
+});
+export const SkipButton = memo(({type, iconSize = 30}: SkipButtonProps) => {
   const iconName = type === 'next' ? 'play-forward' : 'play-back';
   const onPress = () => {
     if (type === 'next') {
@@ -40,8 +40,8 @@ export const SkipButton = ({type, iconSize = 30}: SkipButtonProps) => {
       <Icon name={iconName} size={iconSize} color={Colors.text} />
     </TouchableOpacity>
   );
-};
-export const PlayerControls = ({style}: PlayerControlsProps) => {
+});
+export const PlayerControls = memo(({style}: PlayerControlsProps) => {
   return (
     <View style={[styles.container, style]}>
       <View style={styles.row}>
@@ -53,7 +53,7 @@ export const PlayerControls = ({style}: PlayerControlsProps) => {
       </View>
     </View>
   );
-};
+});
 const styles = StyleSheet.create({
   container: {
     width: '100%',

@@ -124,7 +124,7 @@ const RootLayout = () => (
             animationDuration: 400,
           },
           android: {
-            presentation: 'transparentModal', // Better for Android
+            presentation: 'card',
             animation: 'slide_from_bottom',
             animationDuration: 250,
             // Android-specific configs:

@@ -42,5 +42,7 @@ const styles = {
     opacity: 0.3,
   },
   flatLstBottom: {paddingBottom: 280},
+  flexed: {flex: 1},
+  mtAuto: {marginTop: 'auto'},
 };
 export default styles;

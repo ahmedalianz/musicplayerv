@@ -1,7 +1,7 @@
 import {Styles} from '@/constants';
 import {TracksListProps, TrackV} from '@/types/TracksList.types';
 import React, {memo, useCallback, useRef} from 'react';
-import {FlatList, View} from 'react-native';
+import {FlatList, StyleSheet, View} from 'react-native';
 import Animated, {
   useAnimatedScrollHandler,
   useSharedValue,
@@ -84,7 +84,7 @@ const TracksList = ({
         renderItem={renderItem}
         ListHeaderComponent={
           !hideQueueControls ? (
-            <QueueControls tracks={tracks} style={{paddingBottom: 20}} />
+            <QueueControls tracks={tracks} style={styles.pb20} />
           ) : undefined
         }
         ItemSeparatorComponent={ItemSeparatorComponent}
@@ -106,3 +106,6 @@ const TracksList = ({
 };
 
 export default memo(TracksList);
+const styles = StyleSheet.create({
+  pb20: {paddingBottom: 20},
+});

@@ -2,6 +2,7 @@ const colors = {
   primary: '#fc3c44',
   background: '#000',
   lightBackground: 'rgba(0,0,0,0.5)',
+  veryLightBackground: 'rgba(0,0,0,0.1)',
   lighterBackground: 'rgba(47, 47, 47, 0.5)',
   blackContainer: '#252525',
   text: '#fff',

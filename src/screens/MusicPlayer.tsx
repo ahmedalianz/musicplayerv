@@ -1,5 +1,5 @@
-import {StyleSheet, Text, View} from 'react-native';
-import React from 'react';
+import {StyleSheet, Text, View, Animated, Easing} from 'react-native';
+import React, {useEffect, useMemo, useRef} from 'react';
 import {Colors, FontSize, Images, Styles} from '@/constants';
 import {
   DismissPlayer,
@@ -14,124 +14,199 @@ import MovingText from '@/components/Player/MovingText';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {useTrackPlayerFavorite} from '@/hooks';
 import {PlayerControls} from '@/components/Player/PlayerControls';
-import LinearGradient from 'react-native-linear-gradient';
+
 const MusicPlayer = () => {
   const {top, bottom} = useSafeAreaInsets();
   const activeTrack = useActiveTrack();
+  const spinAnim = useRef(new Animated.Value(0)).current;
   const {isFavorite, toggleFavorite} = useTrackPlayerFavorite();
+
+  const {title, artist, artwork} = useMemo(
+    () => ({
+      title: activeTrack?.title ?? '',
+      artist: activeTrack?.artist ?? '',
+      artwork: activeTrack?.artwork ?? Images.unknownTrack,
+    }),
+    [activeTrack]
+  );
+
+  useEffect(() => {
+    const loop = Animated.loop(
+      Animated.timing(spinAnim, {
+        toValue: 1,
+        duration: 20000,
+        easing: Easing.linear,
+        useNativeDriver: true,
+      })
+    );
+    loop.start();
+    return () => loop.stop();
+  }, [spinAnim]);
+
+  const spin = spinAnim.interpolate({
+    inputRange: [0, 1],
+    outputRange: ['0deg', '360deg'],
+  });
+
   return (
-    <LinearGradient
-      colors={[Colors.background, Colors.primary]}
-      style={styles.linearGradient}>
-      <View style={styles.overlayContainer}>
+    <View style={styles.container}>
+      <FastImage
+        source={{uri: artwork}}
+        style={styles.backgroundImage}
+        blurRadius={10}
+      />
+      <View style={styles.overlay} />
+
+      <View style={styles.contentContainer}>
         <DismissPlayer />
-        <View style={{flex: 1, paddingTop: top + 70, paddingBottom: bottom}}>
-          <View style={styles.imageContainer}>
-            <FastImage
-              key={activeTrack?.artwork ?? Images.unknownTrack}
-              source={{
-                uri: activeTrack?.artwork ?? Images.unknownTrack,
-                priority: FastImage.priority.high,
-              }}
-              resizeMode="cover"
-              style={styles.image}
-            />
+
+        <View
+          style={[
+            styles.mainContent,
+            {paddingTop: top + 40, paddingBottom: bottom},
+          ]}>
+          {/* Vinyl record with rotating animation */}
+          <View style={styles.vinylContainer}>
+            <Animated.View
+              style={[styles.vinyl, {transform: [{rotate: spin}]}]}>
+              <FastImage
+                source={{uri: artwork}}
+                style={styles.vinylImage}
+                resizeMode="cover"
+              />
+              <View style={styles.vinylCenter} />
+            </Animated.View>
           </View>
-          <View style={{flex: 1, justifyContent: 'flex-end'}}>
-            <View style={{marginTop: 'auto'}}>
-              <View style={{height: 60}}>
-                <View
-                  style={{
-                    flexDirection: 'row',
-                    justifyContent: 'space-between',
-                    alignItems: 'center',
-                  }}>
-                  {/* Track title */}
-                  <View style={styles.trackTitleContainer}>
-                    <MovingText
-                      text={activeTrack?.title ?? ''}
-                      animationThreshold={30}
-                      style={styles.trackTitleText}
-                    />
-                  </View>
 
-                  {/* Favorite button icon */}
-                  <Icon
-                    name={isFavorite ? 'heart' : 'heart-outline'}
-                    size={20}
-                    color={isFavorite ? Colors.primary : Colors.icon}
-                    style={{marginHorizontal: 14}}
-                    onPress={toggleFavorite}
-                  />
-                </View>
-
-                {/* Track artist */}
-                {activeTrack?.artist && (
-                  <Text
-                    numberOfLines={1}
-                    style={[styles.trackArtistText, {marginTop: 6}]}>
-                    {activeTrack?.artist}
-                  </Text>
-                )}
+          {/* Track info and controls */}
+          <View style={styles.infoContainer}>
+            <View style={styles.trackHeader}>
+              <View style={styles.trackTitleContainer}>
+                <MovingText
+                  text={title}
+                  animationThreshold={30}
+                  style={styles.trackTitleText}
+                />
               </View>
-              <PlayerProgressbar style={{marginTop: 32}} />
 
-              <PlayerControls style={{marginTop: 40}} />
+              <Icon
+                name={isFavorite ? 'heart' : 'heart-outline'}
+                size={24}
+                color={isFavorite ? Colors.primary : Colors.icon}
+                onPress={toggleFavorite}
+              />
             </View>
 
-            <PlayerVolumeBar style={{marginTop: 'auto', marginBottom: 30}} />
+            {artist && (
+              <Text numberOfLines={1} style={styles.trackArtistText}>
+                {artist}
+              </Text>
+            )}
 
+            <PlayerProgressbar style={styles.progressBar} />
+            <PlayerControls style={styles.controls} />
+            <PlayerVolumeBar style={styles.volumeBar} />
             <View style={Styles.centeredRow}>
-              <PlayerRepeatToggle size={30} style={{marginBottom: 6}} />
+              <PlayerRepeatToggle size={26} style={styles.mb6} />
             </View>
           </View>
         </View>
       </View>
-    </LinearGradient>
+    </View>
   );
 };
 
-export default MusicPlayer;
-
 const styles = StyleSheet.create({
-  linearGradient: {
+  container: {
     flex: 1,
+    backgroundColor: Colors.background,
   },
-  overlayContainer: {
-    ...Styles.container,
-    paddingHorizontal: 24,
+  backgroundImage: {
+    ...StyleSheet.absoluteFillObject,
+    opacity: 0.6,
+  },
+  overlay: {
+    ...StyleSheet.absoluteFillObject,
     backgroundColor: Colors.lightBackground,
   },
-  imageContainer: {
-    shadowOffset: {
-      width: 0,
-      height: 0,
-    },
-    shadowOpacity: 0.44,
-    shadowRadius: 11,
-    height: '45%',
-    flexDirection: 'row',
-    justifyContent: 'center',
+  contentContainer: {
+    flex: 1,
+    paddingHorizontal: 24,
   },
-  image: {
-    width: '100%',
-    height: '100%',
-    borderRadius: 12,
-    resizeMode: 'cover',
+  mainContent: {
+    flex: 1,
+  },
+  vinylContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginVertical: 40,
+  },
+  vinyl: {
+    width: 260,
+    height: 260,
+    borderRadius: 140,
+    backgroundColor: Colors.veryLightBackground,
+    justifyContent: 'center',
+    alignItems: 'center',
+    shadowColor: Colors.background,
+    shadowOffset: {width: 0, height: 10},
+    shadowOpacity: 0.3,
+    shadowRadius: 20,
+    elevation: 10,
+  },
+  vinylImage: {
+    width: 240,
+    height: 240,
+    borderRadius: 120,
+  },
+  vinylCenter: {
+    position: 'absolute',
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    backgroundColor: Colors.minimumTrackTintColor,
+    borderWidth: 8,
+    borderColor: Colors.lightBackground,
+    opacity: 0.7,
+  },
+  infoContainer: {
+    flex: 1,
+    justifyContent: 'flex-end',
+    paddingBottom: 20,
+  },
+  trackHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 8,
   },
   trackTitleContainer: {
     flex: 1,
     overflow: 'hidden',
+    marginRight: 16,
   },
   trackTitleText: {
     ...Styles.text,
-    fontSize: 22,
+    fontSize: 24,
     fontWeight: '700',
   },
   trackArtistText: {
     ...Styles.text,
     fontSize: FontSize.base,
     opacity: 0.8,
-    maxWidth: '90%',
+    marginBottom: 32,
+  },
+  progressBar: {
+    marginBottom: 40,
+  },
+  controls: {
+    marginBottom: 30,
+  },
+  volumeBar: {
+    marginBottom: 20,
+  },
+  mb6: {
+    marginBottom: 6,
   },
 });
+
+export default MusicPlayer;

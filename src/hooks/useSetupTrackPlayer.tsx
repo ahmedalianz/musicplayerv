@@ -3,7 +3,7 @@ import {
   useTracks,
   useTracksActions,
 } from '@/store/selectors';
-import {useEffect, useRef} from 'react';
+import {useEffect, useRef, useState} from 'react';
 import TrackPlayer, {RepeatMode} from 'react-native-track-player';
 
 const setupPlayer = async () => {
@@ -13,7 +13,9 @@ const setupPlayer = async () => {
   await TrackPlayer.setVolume(0.3);
   await TrackPlayer.setRepeatMode(RepeatMode.Queue);
 };
-const useSetupTrackPlayer = ({onLoad}: {onLoad?: () => void}) => {
+const useSetupTrackPlayer = () => {
+  const [progress, setProgress] = useState(0);
+  const [loading, setLoading] = useState(true);
   const {fetchDeviceTracks} = useTracksActions();
   const _hasHydrated = useIsStoreHydrated();
   const tracks = useTracks();
@@ -21,21 +23,26 @@ const useSetupTrackPlayer = ({onLoad}: {onLoad?: () => void}) => {
   useEffect(() => {
     setupPlayer()
       .then(() => {
+        setProgress(0.3);
         isInitialized.current = true;
-        onLoad?.();
       })
       .then(() => {
+        setProgress(0.6);
         if (_hasHydrated) {
           if (!tracks?.length) {
-            fetchDeviceTracks();
+            fetchDeviceTracks().then(() => setProgress(0.9));
           }
+          TrackPlayer.add(tracks.slice(0, 10));
+          setProgress(1);
         }
       })
       .catch(err => {
         isInitialized.current = false;
         console.error(err);
-      });
-  }, [_hasHydrated, onLoad, tracks, fetchDeviceTracks]);
+      })
+      .finally(() => setLoading(false));
+  }, [_hasHydrated, tracks, fetchDeviceTracks]);
+  return {progress, loading};
 };
 
 export default useSetupTrackPlayer;

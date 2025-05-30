@@ -1,7 +1,7 @@
-import getMusicFiles from '@/utils/getMusicFiles';
 import {Artist} from '@/types/Artist.types';
 import {groupTracksByArtist} from '@/utils/filters';
 import {TrackV} from '@/types/TracksList.types';
+import {getMusicFiles} from '@/utils/getMusicFiles';
 
 export interface TracksState {
   tracks: TrackV[];

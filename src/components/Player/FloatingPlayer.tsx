@@ -1,5 +1,5 @@
 import {StyleSheet, TouchableOpacity, View, ViewProps} from 'react-native';
-import React from 'react';
+import React, {useEffect, useMemo} from 'react';
 import {Colors, Images, Styles} from '@/constants';
 import FastImage from 'react-native-fast-image';
 import {useNavigation} from '@react-navigation/native';
@@ -11,11 +11,19 @@ import {InScreenNavigation} from '@/types/Navigation.types';
 
 const FloatingPlayer = ({style}: ViewProps) => {
   const navigation = useNavigation<InScreenNavigation>();
-
   const activeTrack = useActiveTrack();
   const {lastActiveTrack} = useLastActiveTrack();
 
-  const displayedTrack = activeTrack ?? lastActiveTrack;
+  const displayedTrack = useMemo(
+    () => activeTrack ?? lastActiveTrack,
+    [activeTrack, lastActiveTrack]
+  );
+
+  useEffect(() => {
+    if (displayedTrack?.artwork) {
+      FastImage.preload([{uri: displayedTrack.artwork}]);
+    }
+  }, [displayedTrack?.artwork]);
 
   const handlePress = () => {
     navigation.navigate('MusicPlayer');
@@ -24,37 +32,38 @@ const FloatingPlayer = ({style}: ViewProps) => {
   if (!displayedTrack) {
     return null;
   }
+
   return (
     <TouchableOpacity
       onPress={handlePress}
       activeOpacity={0.9}
       style={[styles.container, style]}>
-      <>
-        <FastImage
-          source={{
-            uri: displayedTrack?.artwork ?? Images.unknownTrack,
-          }}
-          style={styles.trackArtworkImage}
+      <FastImage
+        source={{
+          uri: displayedTrack.artwork ?? Images.unknownTrack,
+          priority: FastImage.priority.normal,
+        }}
+        defaultSource={Images.unknownTrackSource}
+        style={styles.trackArtworkImage}
+      />
+
+      <View style={styles.trackTitleContainer}>
+        <MovingText
+          style={styles.trackTitle}
+          text={displayedTrack.title ?? ''}
+          animationThreshold={25}
         />
+      </View>
 
-        <View style={styles.trackTitleContainer}>
-          <MovingText
-            style={styles.trackTitle}
-            text={displayedTrack.title ?? ''}
-            animationThreshold={25}
-          />
-        </View>
-
-        <View style={styles.trackControlsContainer}>
-          <PlayPauseButton iconSize={24} />
-          <SkipButton type="next" iconSize={22} />
-        </View>
-      </>
+      <View style={styles.trackControlsContainer}>
+        <PlayPauseButton iconSize={24} />
+        <SkipButton type="next" iconSize={22} />
+      </View>
     </TouchableOpacity>
   );
 };
 
-export default FloatingPlayer;
+export default React.memo(FloatingPlayer);
 
 const styles = StyleSheet.create({
   container: {

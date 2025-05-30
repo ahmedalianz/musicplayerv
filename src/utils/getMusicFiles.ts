@@ -1,44 +1,38 @@
-import {getAll} from '@kingfang007/react-native-get-music-files'; // Or from 'react-native-get-music-files'
+import {getAll} from '@kingfang007/react-native-get-music-files';
 import requestStoragePermission from './requestStoragePermission';
+import {TrackV} from '@/types/TracksList.types';
 
-const getMusicFiles = async () => {
-  const hasPermission = await requestStoragePermission(); // Call the permission function from step 1
+export const getMusicFiles = async ({limit}: {limit?: number} = {}) => {
+  const hasPermission = await requestStoragePermission();
   if (!hasPermission) {
-    return;
+    return [];
   }
 
-  try {
-    const rawDeviceTracks = await getAll({
-      coverQuality: 50,
-      limit: 100,
-    });
+  const rawTracks = await getAll({
+    coverQuality: 50,
+    limit,
+  });
 
-    const formattedTracks = rawDeviceTracks?.map(rawTrack => {
-      let artworkUri = null;
-
-      if (rawTrack.cover && typeof rawTrack.cover === 'string') {
-        if (rawTrack.cover.startsWith('data:image')) {
-          artworkUri = rawTrack.cover;
-        } else {
-          artworkUri = `data:image/jpeg;base64,${rawTrack.cover}`;
-        }
-      } else if (rawTrack.artworkUrl) {
-        artworkUri = rawTrack.artworkUrl;
-      }
-
-      return {
-        id: rawTrack?.url + rawTrack?.title,
-        url: rawTrack?.path || rawTrack?.url,
-        title: rawTrack?.title || 'Unknown Title',
-        artist: rawTrack?.artist || rawTrack?.author || 'Unknown Artist',
-        album: rawTrack?.album || 'Unknown Album',
-        duration: rawTrack?.duration ?? 0,
-        artwork: artworkUri,
-      };
-    });
-    return formattedTracks;
-  } catch (error) {
-    console.error('Error fetching songs:', error);
-  }
+  return Array.isArray(rawTracks) ? rawTracks.map(formatTrack) : [];
 };
-export default getMusicFiles;
+const getArtworkUri = (track: any) => {
+  if (track.artworkUrl) {
+    return track.artworkUrl;
+  }
+  if (!track.cover) {
+    return null;
+  }
+
+  return track.cover.startsWith('data:image')
+    ? track.cover
+    : `data:image/jpeg;base64,${track.cover}`;
+};
+const formatTrack = (rawTrack: any): TrackV => ({
+  id: `${rawTrack.url}_${rawTrack.title}`,
+  url: rawTrack.path || rawTrack.url,
+  title: rawTrack.title || 'Unknown Title',
+  artist: rawTrack.artist || rawTrack.author || 'Unknown Artist',
+  album: rawTrack.album || 'Unknown Album',
+  duration: rawTrack.duration ?? 0,
+  artwork: getArtworkUri(rawTrack),
+});
