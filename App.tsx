@@ -36,7 +36,6 @@ function App(): JSX.Element {
                   justifyContent: 'center',
                   alignItems: 'center',
                 }}
-                duration={1000}
                 type="circle"
               />
             </View>
