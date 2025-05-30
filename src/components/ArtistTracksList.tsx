@@ -1,11 +1,10 @@
-import {FontSize, Styles} from '@/constants';
+import {Artist} from '@/types/Artist.types';
 import {trackTitleFilter} from '@/utils/filters';
 import {generateTracksListId} from '@/utils/formats';
-import {useMemo, useState} from 'react';
+import React, {useMemo, useState} from 'react';
 import {StyleSheet} from 'react-native';
-import TracksList from './TracksList';
-import {Artist} from '@/types/Artist.types';
 import ArtistHeader from './ArtistHeader';
+import TracksList from './TracksList';
 
 const ArtistTracksList = ({artist}: {artist: Artist}) => {
   const [searchQuery, setSearchQuery] = useState('');

@@ -15,7 +15,6 @@ import {FloatingPlayer} from './src/components';
 import {Platform, StyleSheet} from 'react-native';
 import {useActiveTrack} from 'react-native-track-player';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 const getTabBarIcon = (focused: boolean, name: string) => (

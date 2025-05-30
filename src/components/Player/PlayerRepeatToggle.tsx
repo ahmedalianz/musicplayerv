@@ -1,7 +1,7 @@
-import {Colors, FontSize} from '@/constants';
+import {Colors} from '@/constants';
 import {useTrackPlayerRepeat} from '@/hooks';
 import React from 'react';
-import {StyleSheet, View, ViewStyle} from 'react-native';
+import {View, ViewStyle} from 'react-native';
 import {RepeatMode} from 'react-native-track-player';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 const repeatOrder: Record<string, RepeatMode> = {
@@ -45,14 +45,3 @@ const PlayerRepeatToggle = ({
 };
 
 export default PlayerRepeatToggle;
-
-const styles = StyleSheet.create({
-  repeatText: {
-    position: 'absolute',
-    bottom: 20,
-    left: 0,
-    fontSize: FontSize.sm,
-    color: Colors.icon,
-    width: 80,
-  },
-});

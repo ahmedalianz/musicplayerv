@@ -1,6 +1,6 @@
-import {StyleSheet, Text, View, ViewStyle} from 'react-native';
-import React, {useEffect} from 'react';
 import {MovingTextProps} from '@/types/PlayerControls.types';
+import React, {useEffect} from 'react';
+import {View} from 'react-native';
 import Animated, {
   cancelAnimation,
   Easing,
@@ -54,5 +54,3 @@ const MovingText = ({
 };
 
 export default MovingText;
-
-const styles = StyleSheet.create({});
