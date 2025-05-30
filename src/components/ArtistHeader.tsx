@@ -4,7 +4,7 @@ import {QueueControls} from './TrackListComponents';
 import FastImage, {ImageStyle} from 'react-native-fast-image';
 import {FontSize, Images, Styles} from '@/constants';
 import {Artist} from '@/types/Artist.types';
-import {Track} from 'react-native-track-player';
+import {TrackV} from '@/types/TracksList.types';
 
 const ArtistHeader = ({
   artist,
@@ -14,7 +14,7 @@ const ArtistHeader = ({
   imageStyles,
 }: {
   artist: Artist;
-  filteredArtistTracks: Track[];
+  filteredArtistTracks: TrackV[];
   search: string;
   artworkPreview?: string;
   imageStyles?: ImageStyle;

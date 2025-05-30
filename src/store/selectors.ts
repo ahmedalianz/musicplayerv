@@ -5,7 +5,7 @@ export const useFavorites = () => useStore(state => state.favorites);
 export const useTracks = () => useStore(state => state.tracks);
 export const useQueue = () => useStore(state => state.activeQueueId);
 export const useArtists = () => useStore(state => state.artists);
-// export const usePlaylists = () => useStore(state => state.playlists);
+export const usePlaylists = () => useStore(state => state.playlists);
 export const useTracksActions = () =>
   useStore(
     useShallow(state => ({
@@ -18,13 +18,15 @@ export const useFavoriteActions = () =>
       toggleTrackFavorite: state.toggleTrackFavorite,
     })),
   );
-// export const usePlaylistActions = () =>
-//   useStore(
-//     useShallow(state => ({
-//       addToPlaylist: state.addToPlaylist,
-//       removeFromPlaylist: state.removeFromPlaylist,
-//     })),
-//   );
+export const usePlaylistActions = () =>
+  useStore(
+    useShallow(state => ({
+      addToPlaylist: state.addTrackToPlaylist,
+      removeFromPlaylist: state.removeTrackFromPlaylist,
+      createPlaylist: state.createPlaylist,
+      removePlaylist: state.removePlaylist,
+    })),
+  );
 
 export const useQueueActions = () =>
   useStore(useShallow(state => ({setActiveQueueId: state.setActiveQueueId})));

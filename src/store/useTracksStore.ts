@@ -1,17 +1,16 @@
-import {Track} from 'react-native-track-player';
 import getMusicFiles from '@/utils/getMusicFiles';
 import {Artist} from '@/types/Artist.types';
 import {groupTracksByArtist} from '@/utils/filters';
-import {TrackWithPlaylist} from '@/types/TracksList.types';
+import {TrackV} from '@/types/TracksList.types';
 
 export interface TracksState {
-  tracks: Track[];
+  tracks: TrackV[];
   artists: Artist[];
-  favorites: TrackWithPlaylist[];
-  toggleTrackFavorite: (track: TrackWithPlaylist) => void;
-  setTracks: (tracks: Track[]) => void;
+  favorites: TrackV[];
+  toggleTrackFavorite: (track: TrackV) => void;
+  setTracks: (tracks: TrackV[]) => void;
   fetchDeviceTracks: () => Promise<void>;
-  // _hasHydrated: boolean;
+  _hasHydrated: boolean;
 }
 
 export const createTracksSlice = (
@@ -34,7 +33,7 @@ export const createTracksSlice = (
       console.error('Failed to fetch device tracks:', error);
     }
   },
-  toggleTrackFavorite: (track: TrackWithPlaylist) =>
+  toggleTrackFavorite: (track: TrackV) =>
     set(state => {
       const trackIndex = state.favorites.findIndex(t => t.url === track.url);
       if (trackIndex === -1) state.favorites.push(track);

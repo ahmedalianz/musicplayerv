@@ -1,8 +1,7 @@
 import {Artist} from '@/types/Artist.types';
-import {Playlist} from '@/types/TracksList.types';
-import {Track} from 'react-native-track-player';
+import {Playlist, TrackV} from '@/types/TracksList.types';
 
-export const trackTitleFilter = (title: string) => (track: Track) =>
+export const trackTitleFilter = (title: string) => (track: TrackV) =>
   track.title?.toLowerCase().includes(title.toLowerCase());
 
 export const artistNameFilter = (name: string) => (artist: Artist) =>
@@ -10,8 +9,8 @@ export const artistNameFilter = (name: string) => (artist: Artist) =>
 
 export const playlistNameFilter = (name: string) => (playlist: Playlist) =>
   playlist.name.toLowerCase().includes(name.toLowerCase());
-export const groupTracksByArtist = (tracks: Track[]) => {
-  const grouped: Record<string, Track[]> = {};
+export const groupTracksByArtist = (tracks: TrackV[]) => {
+  const grouped: Record<string, TrackV[]> = {};
 
   for (const track of tracks) {
     const artistName = track?.artist || 'Unknown Artist';
@@ -27,30 +26,4 @@ export const groupTracksByArtist = (tracks: Track[]) => {
     name,
     tracks,
   }));
-};
-export const groupTracksByPlaylist = (
-  tracks: Track[],
-  defaultArtwork: string,
-): Playlist[] => {
-  const playlistMap = new Map<string, Playlist>();
-
-  for (const track of tracks) {
-    if (!track.playlist) continue;
-
-    for (const playlistName of track.playlist) {
-      const existing = playlistMap.get(playlistName);
-
-      if (existing) {
-        existing.tracks.push(track);
-      } else {
-        playlistMap.set(playlistName, {
-          name: playlistName,
-          tracks: [track],
-          artworkPreview: track.artwork ?? defaultArtwork,
-        });
-      }
-    }
-  }
-
-  return Array.from(playlistMap.values());
 };

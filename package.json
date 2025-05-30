@@ -12,7 +12,8 @@
     "clean": "cd android && ./gradlew clean && cd ..",
     "nuke": "rm -rf node_modules package-lock.json yarn.lock && yarn install && react-native start --reset-cache",
     "build": "cd android && ./gradlew assembleDebug && cd .. && react-native run-android",
-    "release": "react-native run-android --variant=release"
+    "release": "react-native run-android --variant=release",
+    "debug": "npx @react-native-community/cli debug"
   },
   "dependencies": {
     "@kingfang007/react-native-get-music-files": "^2.4.0",

@@ -3,8 +3,9 @@ import {createQueueSlice, QueueStore} from './useQueueStore';
 import {createTracksSlice, TracksState} from './useTracksStore';
 import {persist, createJSONStorage} from 'zustand/middleware';
 import {mmkv} from '@/utils/mmkv';
+import {createPlaylistsState, PlaylistsState} from './usePlaylistsStore';
 
-export interface StoreState extends QueueStore, TracksState {
+export interface StoreState extends QueueStore, TracksState, PlaylistsState {
   _hasHydrated: boolean;
 }
 
@@ -13,6 +14,7 @@ export const useStore = create<StoreState>()(
     set => ({
       ...createQueueSlice(set),
       ...createTracksSlice(set),
+      ...createPlaylistsState(set),
       _hasHydrated: false,
     }),
     {
@@ -22,7 +24,7 @@ export const useStore = create<StoreState>()(
         tracks: state.tracks,
         artists: state.artists,
         favorites: state.favorites,
-        // activeQueueId: state.activeQueueId, // If you want to persist the active queue
+        playlists: state.playlists,
       }),
       onRehydrateStorage: () => {
         // This function is called once rehydration is done.

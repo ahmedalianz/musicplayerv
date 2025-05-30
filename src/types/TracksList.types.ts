@@ -1,9 +1,11 @@
 import {ViewProps, ViewStyle} from 'react-native';
 import {Track} from 'react-native-track-player';
-
+export type TrackV = Track & {
+  id: string;
+};
 export type TracksListItemProps = {
-  track: Track;
-  onTrackSelect: (track: Track) => void;
+  track: TrackV;
+  onTrackSelect: (track: TrackV) => void;
 };
 export type TracksListSearchProps = {
   searchQuery: string;
@@ -11,7 +13,7 @@ export type TracksListSearchProps = {
 };
 export type TracksListProps = TracksListSearchProps & {
   id: string;
-  tracks: Track[];
+  tracks: TrackV[];
   hideQueueControls: boolean;
   title?: string;
   headerCustomStyle?: ViewStyle;
@@ -20,12 +22,10 @@ export type TracksListProps = TracksListSearchProps & {
 
 export type Playlist = {
   name: string;
-  tracks: Track[];
+  tracks: TrackV[];
   artworkPreview: string;
 };
-export type TrackWithPlaylist = Track & {
-  playlist?: string[];
-};
+
 export type QueueControlsProps = {
-  tracks: Track[];
+  tracks: TrackV[];
 } & ViewProps;

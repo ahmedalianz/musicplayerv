@@ -1,12 +1,12 @@
 import {Styles} from '@/constants';
-import {TracksListProps} from '@/types/TracksList.types';
+import {TracksListProps, TrackV} from '@/types/TracksList.types';
 import React, {memo, useCallback, useRef} from 'react';
-import {FlatList, Text, View} from 'react-native';
+import {FlatList, View} from 'react-native';
 import Animated, {
   useAnimatedScrollHandler,
   useSharedValue,
 } from 'react-native-reanimated';
-import TrackPlayer, {Track} from 'react-native-track-player';
+import TrackPlayer from 'react-native-track-player';
 import {
   ItemSeparatorComponent,
   ListEmptySongsComponent,
@@ -30,7 +30,7 @@ const TracksList = ({
   const activeQueueId = useQueue();
   const {setActiveQueueId} = useQueueActions();
   const onTrackSelect = useCallback(
-    async (track: Track) => {
+    async (track: TrackV) => {
       const isChangingQueue = activeQueueId !== id;
       const trackIndex = tracks.findIndex(t => t.url === track.url);
 

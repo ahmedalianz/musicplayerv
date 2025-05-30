@@ -1,6 +1,6 @@
-import {Track} from 'react-native-track-player';
+import {TrackV} from './TracksList.types';
 
 export type Artist = {
   name: string;
-  tracks: Track[];
+  tracks: TrackV[];
 };

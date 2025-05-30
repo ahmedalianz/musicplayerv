@@ -1,11 +1,12 @@
 import {useFavoriteActions, useQueue} from '@/store/selectors';
 import {InScreenNavigation} from '@/types/Navigation.types';
+import {TrackV} from '@/types/TracksList.types';
 import {useNavigation} from '@react-navigation/native';
 import {PropsWithChildren} from 'react';
 import {View} from 'react-native';
-import TrackPlayer, {Track} from 'react-native-track-player';
+import TrackPlayer from 'react-native-track-player';
 
-type TrackShortcutsMenuProps = PropsWithChildren<{track: Track}>;
+type TrackShortcutsMenuProps = PropsWithChildren<{track: TrackV}>;
 
 const TrackShortcutsMenu = ({track, children}: TrackShortcutsMenuProps) => {
   const navigation = useNavigation<InScreenNavigation>();
