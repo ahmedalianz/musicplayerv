@@ -21,6 +21,7 @@ export type TracksListProps = TracksListSearchProps & {
 };
 
 export type Playlist = {
+  playListId: number;
   playListName: string;
   tracks: TrackV[];
   artworkPreview?: string;
