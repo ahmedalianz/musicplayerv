@@ -5,7 +5,9 @@ const useLastActiveTrack = () => {
   const activeTrack = useActiveTrack();
   const [lastActiveTrack, setLastActiveTrack] = useState<Track>();
   useEffect(() => {
-    if (!activeTrack) return;
+    if (!activeTrack) {
+      return;
+    }
     setLastActiveTrack(activeTrack);
   }, [activeTrack]);
   return {lastActiveTrack};

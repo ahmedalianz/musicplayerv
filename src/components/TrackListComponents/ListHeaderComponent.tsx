@@ -46,19 +46,19 @@ const ListHeaderComponent = ({
       scrollY.value,
       [0, SCROLL_THRESHOLD],
       [30, 20],
-      Extrapolation.CLAMP,
+      Extrapolation.CLAMP
     ),
     fontWeight: interpolate(
       scrollY.value,
       [0, SCROLL_THRESHOLD],
       ['600', '400'],
-      Extrapolation.CLAMP,
+      Extrapolation.CLAMP
     ),
     opacity: interpolate(
       scrollY.value,
       [0, SCROLL_THRESHOLD],
       [1, 0.8],
-      Extrapolation.CLAMP,
+      Extrapolation.CLAMP
     ),
   }));
   const headerContainerStyle = useAnimatedStyle<ViewStyle>(() => ({
@@ -68,7 +68,7 @@ const ListHeaderComponent = ({
           scrollY.value,
           [0, SCROLL_THRESHOLD],
           [0, -5],
-          Extrapolation.CLAMP,
+          Extrapolation.CLAMP
         ),
       },
     ],
@@ -80,7 +80,7 @@ const ListHeaderComponent = ({
           scrollY.value,
           [0, SCROLL_THRESHOLD],
           [0, -10],
-          Extrapolation.CLAMP,
+          Extrapolation.CLAMP
         ),
       },
     ],
@@ -88,7 +88,7 @@ const ListHeaderComponent = ({
       scrollY.value,
       [0, SCROLL_THRESHOLD],
       [1, 0.9],
-      Extrapolation.CLAMP,
+      Extrapolation.CLAMP
     ),
   }));
   const transition = CurvedTransition.delay(100);

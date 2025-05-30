@@ -5,7 +5,9 @@ const useTrackPlayerFavorite = () => {
   const activeTrack = useActiveTrack();
   const [isFavorite, setIsFavorite] = useState(false);
   const toggleFavorite = useCallback(async () => {
-    if (!activeTrack) return;
+    if (!activeTrack) {
+      return;
+    }
 
     setIsFavorite(!isFavorite);
   }, [activeTrack, isFavorite]);

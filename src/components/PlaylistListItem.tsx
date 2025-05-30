@@ -5,6 +5,7 @@ import {useNavigation} from '@react-navigation/native';
 import {StyleSheet, Text, TouchableHighlight, View} from 'react-native';
 import FastImage from 'react-native-fast-image';
 import Icon from 'react-native-vector-icons/Ionicons';
+import React from 'react';
 type PlaylistListItemProps = {
   playlist: Playlist;
 };

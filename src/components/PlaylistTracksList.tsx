@@ -6,6 +6,7 @@ import TracksList from './TracksList';
 import {Playlist} from '@/types/TracksList.types';
 import ArtistHeader from './ArtistHeader';
 import {Images} from '@/constants';
+import React from 'react';
 
 const PlaylistTracksList = ({playlist}: {playlist: Playlist}) => {
   const [searchQuery, setSearchQuery] = useState('');

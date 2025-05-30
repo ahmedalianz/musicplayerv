@@ -29,8 +29,8 @@ const MovingText = ({
         withRepeat(
           withTiming(-textWidth, {duration: 5000, easing: Easing.linear}),
           -1,
-          true,
-        ),
+          true
+        )
       );
     }
     return () => {

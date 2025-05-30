@@ -53,14 +53,14 @@ const TracksList = ({
         await TrackPlayer.play();
       }
     },
-    [activeQueueId, id, setActiveQueueId, tracks],
+    [activeQueueId, id, setActiveQueueId, tracks]
   );
 
   const renderItem = useCallback(
     ({item}: {item: any}) => (
       <TrackListItem track={item} onTrackSelect={onTrackSelect} />
     ),
-    [onTrackSelect],
+    [onTrackSelect]
   );
 
   const scrollY = useSharedValue(0);

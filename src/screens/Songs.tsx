@@ -9,7 +9,9 @@ const Songs = () => {
   const tracks = useTracks();
   const [searchQuery, setSearchQuery] = useState('');
   const filteredTracks = useMemo(() => {
-    if (!searchQuery) return tracks;
+    if (!searchQuery) {
+      return tracks;
+    }
     return tracks.filter(trackTitleFilter(searchQuery));
   }, [searchQuery, tracks]);
 
@@ -20,6 +22,7 @@ const Songs = () => {
         tracks={filteredTracks}
         id={generateTracksListId('Songs', searchQuery)}
         title="Songs"
+        hideQueueControls={false}
       />
     </View>
   );

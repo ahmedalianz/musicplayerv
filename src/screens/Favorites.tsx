@@ -10,7 +10,9 @@ const Favorites = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const favorites = useFavorites();
   const filteredTracks = useMemo(() => {
-    if (!searchQuery) return favorites;
+    if (!searchQuery) {
+      return favorites;
+    }
     return favorites.filter(trackTitleFilter(searchQuery));
   }, [searchQuery, favorites]);
   return (

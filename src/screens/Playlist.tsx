@@ -11,7 +11,7 @@ const Playlist = () => {
   const route = useRoute<RouteProp<{params: {playlistName: string}}>>();
   const navigation = useNavigation<InScreenNavigation>();
   const playlist = playlists.find(
-    playlist => playlist.name === route?.params?.playlistName,
+    pl => pl.playListName === route?.params?.playlistName
   );
 
   if (!playlist) {

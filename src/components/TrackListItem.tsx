@@ -4,7 +4,7 @@ import {StyleSheet, Text, TouchableHighlight, View} from 'react-native';
 import FastImage from 'react-native-fast-image';
 import LoaderKit from 'react-native-loader-kit';
 import {useActiveTrack, useIsPlaying} from 'react-native-track-player';
-import Icon from 'react-native-vector-icons/Entypo';
+// import Icon from 'react-native-vector-icons/Entypo';
 import IonIcon from 'react-native-vector-icons/Ionicons';
 import {TrackShortcutsMenu} from './TrackListComponents';
 import React from 'react';
@@ -73,7 +73,7 @@ const TracksListItem = ({
           paddingHorizontal: 5,
         }}>
         <TrackShortcutsMenu track={track}>
-          <Icon name="dots-three-horizontal" size={18} color={Colors.icon} />
+          {/* <Icon name="dots-three-horizontal" size={18} color={Colors.icon} /> */}
         </TrackShortcutsMenu>
       </View>
     </View>

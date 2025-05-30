@@ -1,6 +1,6 @@
 import {StyleSheet, TouchableOpacity, View, ViewProps} from 'react-native';
 import React from 'react';
-import {Images, Styles} from '@/constants';
+import {Colors, Images, Styles} from '@/constants';
 import FastImage from 'react-native-fast-image';
 import {useNavigation} from '@react-navigation/native';
 import {useActiveTrack} from 'react-native-track-player';
@@ -21,7 +21,9 @@ const FloatingPlayer = ({style}: ViewProps) => {
     navigation.navigate('MusicPlayer');
   };
 
-  if (!displayedTrack) return null;
+  if (!displayedTrack) {
+    return null;
+  }
   return (
     <TouchableOpacity
       onPress={handlePress}
@@ -58,7 +60,7 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#252525',
+    backgroundColor: Colors.blackContainer,
     padding: 8,
     borderRadius: 12,
     paddingVertical: 10,

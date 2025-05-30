@@ -48,7 +48,6 @@ const ArtistHeader = ({
 export default ArtistHeader;
 
 const styles = StyleSheet.create({
-  artistHeader: {marginTop: 0, paddingTop: 10},
   artworkImageContainer: {
     flexDirection: 'row',
     justifyContent: 'center',

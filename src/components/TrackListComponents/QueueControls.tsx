@@ -4,7 +4,7 @@ import {StyleSheet, Text, View} from 'react-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import TrackPlayer from 'react-native-track-player';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-
+import React from 'react';
 const QueueControls = ({tracks, style, ...viewProps}: QueueControlsProps) => {
   const handlePlay = async () => {
     await TrackPlayer.setQueue(tracks);
@@ -49,7 +49,7 @@ const QueueControls = ({tracks, style, ...viewProps}: QueueControlsProps) => {
 const styles = StyleSheet.create({
   button: {
     padding: 12,
-    backgroundColor: 'rgba(47, 47, 47, 0.5)',
+    backgroundColor: Colors.lighterBackground,
     borderRadius: 8,
     flexDirection: 'row',
     justifyContent: 'center',

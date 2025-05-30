@@ -21,9 +21,9 @@ export type TracksListProps = TracksListSearchProps & {
 };
 
 export type Playlist = {
-  name: string;
+  playListName: string;
   tracks: TrackV[];
-  artworkPreview: string;
+  artworkPreview?: string;
 };
 
 export type QueueControlsProps = {

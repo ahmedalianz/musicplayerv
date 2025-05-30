@@ -8,7 +8,7 @@ export const artistNameFilter = (name: string) => (artist: Artist) =>
   artist.name.toLowerCase().includes(name.toLowerCase());
 
 export const playlistNameFilter = (name: string) => (playlist: Playlist) =>
-  playlist.name.toLowerCase().includes(name.toLowerCase());
+  playlist.playListName.toLowerCase().includes(name.toLowerCase());
 export const groupTracksByArtist = (tracks: TrackV[]) => {
   const grouped: Record<string, TrackV[]> = {};
 

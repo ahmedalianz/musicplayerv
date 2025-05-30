@@ -10,9 +10,7 @@ const Artist = () => {
   const artists = useArtists();
   const route = useRoute<RouteProp<{params: {artistName: string}}>>();
   const navigation = useNavigation<InScreenNavigation>();
-  const artist = artists.find(
-    artist => artist.name === route?.params?.artistName,
-  );
+  const artist = artists.find(ar => ar.name === route?.params?.artistName);
 
   if (!artist) {
     navigation.goBack();

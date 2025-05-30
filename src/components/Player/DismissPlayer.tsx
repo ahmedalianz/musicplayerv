@@ -1,6 +1,7 @@
 import {StyleSheet, View} from 'react-native';
 import React from 'react';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import {Colors} from '@/constants';
 
 const DismissPlayer = () => {
   const {top} = useSafeAreaInsets();
@@ -25,7 +26,7 @@ const styles = StyleSheet.create({
     width: 50,
     height: 8,
     borderRadius: 8,
-    backgroundColor: '#fff',
+    backgroundColor: Colors.text,
     opacity: 0.7,
   },
 });

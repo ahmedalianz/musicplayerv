@@ -8,7 +8,7 @@ export const mmkv: StateStorage = {
     return storage.set(name, value);
   },
   getItem: (
-    name: string,
+    name: string
   ): string | null | undefined | Promise<string | null | undefined> => {
     const value = storage.getString(name);
     return value === undefined ? null : value;

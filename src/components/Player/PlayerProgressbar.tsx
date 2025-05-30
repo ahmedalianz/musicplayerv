@@ -56,18 +56,6 @@ const PlayerProgressbar = ({style}: any) => {
 export default PlayerProgressbar;
 
 const styles = StyleSheet.create({
-  bubble: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
-    backgroundColor: '#fff',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  bubbleText: {
-    fontSize: 16,
-    color: '#000',
-  },
   timeRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',
