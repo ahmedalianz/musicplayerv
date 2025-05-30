@@ -10,13 +10,13 @@ export const useTracksActions = () =>
   useStore(
     useShallow(state => ({
       fetchDeviceTracks: state.fetchDeviceTracks,
-    })),
+    }))
   );
 export const useFavoriteActions = () =>
   useStore(
     useShallow(state => ({
       toggleTrackFavorite: state.toggleTrackFavorite,
-    })),
+    }))
   );
 export const usePlaylistActions = () =>
   useStore(
@@ -25,7 +25,7 @@ export const usePlaylistActions = () =>
       removeFromPlaylist: state.removeTrackFromPlaylist,
       createPlaylist: state.createPlaylist,
       removePlaylist: state.removePlaylist,
-    })),
+    }))
   );
 
 export const useQueueActions = () =>

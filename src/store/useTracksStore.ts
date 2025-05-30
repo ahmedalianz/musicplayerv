@@ -14,7 +14,7 @@ export interface TracksState {
 }
 
 export const createTracksSlice = (
-  set: (fn: (state: TracksState) => Partial<TracksState>) => void,
+  set: (fn: (state: TracksState) => Partial<TracksState>) => void
 ): Omit<TracksState, '_hasHydrated'> => ({
   tracks: [],
   artists: [],

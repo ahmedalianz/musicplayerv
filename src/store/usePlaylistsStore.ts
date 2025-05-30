@@ -13,7 +13,7 @@ export interface PlaylistsState {
 }
 
 export const createPlaylistsState = (
-  set: (fn: (state: PlaylistsState) => Partial<PlaylistsState>) => void,
+  set: (fn: (state: PlaylistsState) => Partial<PlaylistsState>) => void
 ): PlaylistsState => ({
   playlists: [],
   addTrackToPlaylist: (track: TrackV, playListId: number) =>
