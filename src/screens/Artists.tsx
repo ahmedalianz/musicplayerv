@@ -24,7 +24,7 @@ const Artists = () => {
   const filteredArtists = useMemo(() => {
     if (!searchQuery) return artists;
     return artists.filter(artistNameFilter(searchQuery));
-  }, [searchQuery]);
+  }, [searchQuery, artists]);
   const scrollY = useSharedValue(0);
   const flatListRef = useRef<FlatList>(null);
   const scrollHandler = useAnimatedScrollHandler({

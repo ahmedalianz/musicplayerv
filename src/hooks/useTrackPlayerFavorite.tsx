@@ -1,5 +1,5 @@
 import {useCallback, useState} from 'react';
-import TrackPlayer, {Track, useActiveTrack} from 'react-native-track-player';
+import {useActiveTrack} from 'react-native-track-player';
 
 const useTrackPlayerFavorite = () => {
   const activeTrack = useActiveTrack();
@@ -8,7 +8,7 @@ const useTrackPlayerFavorite = () => {
     if (!activeTrack) return;
 
     setIsFavorite(!isFavorite);
-  }, []);
+  }, [activeTrack, isFavorite]);
 
   return {isFavorite, toggleFavorite};
 };

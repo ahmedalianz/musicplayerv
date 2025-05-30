@@ -35,7 +35,7 @@ const useSetupTrackPlayer = ({onLoad}: {onLoad?: () => void}) => {
         isInitialized.current = false;
         console.error(err);
       });
-  }, []);
+  }, [_hasHydrated, onLoad, tracks, fetchDeviceTracks]);
 };
 
 export default useSetupTrackPlayer;

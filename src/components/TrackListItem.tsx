@@ -1,18 +1,13 @@
-import {Colors, Styles, FontSize, Images} from '@/constants';
+import {Colors, FontSize, Images, Styles} from '@/constants';
 import {TracksListItemProps} from '@/types/TracksList.types';
-import {
-  Pressable,
-  StyleSheet,
-  Text,
-  TouchableHighlight,
-  View,
-} from 'react-native';
+import {StyleSheet, Text, TouchableHighlight, View} from 'react-native';
 import FastImage from 'react-native-fast-image';
+import LoaderKit from 'react-native-loader-kit';
 import {useActiveTrack, useIsPlaying} from 'react-native-track-player';
 import Icon from 'react-native-vector-icons/Entypo';
 import IonIcon from 'react-native-vector-icons/Ionicons';
-import LoaderKit from 'react-native-loader-kit';
 import {TrackShortcutsMenu} from './TrackListComponents';
+import React from 'react';
 const TracksListItem = ({
   track,
   onTrackSelect: handleTrackSelect,

@@ -1,10 +1,10 @@
-import {StyleSheet, Text, View} from 'react-native';
-import React from 'react';
-import {Styles} from '@/constants';
-import {RouteProp, useNavigation, useRoute} from '@react-navigation/native';
-import {useArtists} from '@/store/selectors';
 import {ArtistTracksList} from '@/components';
+import {Styles} from '@/constants';
+import {useArtists} from '@/store/selectors';
 import {InScreenNavigation} from '@/types/Navigation.types';
+import {RouteProp, useNavigation, useRoute} from '@react-navigation/native';
+import React from 'react';
+import {View} from 'react-native';
 
 const Artist = () => {
   const artists = useArtists();
@@ -27,5 +27,3 @@ const Artist = () => {
 };
 
 export default Artist;
-
-const styles = StyleSheet.create({});

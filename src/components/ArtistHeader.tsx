@@ -1,10 +1,10 @@
-import {StyleSheet, Text, View, ViewStyle} from 'react-native';
-import React from 'react';
-import {QueueControls} from './TrackListComponents';
-import FastImage, {ImageStyle} from 'react-native-fast-image';
 import {FontSize, Images, Styles} from '@/constants';
 import {Artist} from '@/types/Artist.types';
 import {TrackV} from '@/types/TracksList.types';
+import React from 'react';
+import {StyleSheet, Text, View} from 'react-native';
+import FastImage, {ImageStyle} from 'react-native-fast-image';
+import {QueueControls} from './TrackListComponents';
 
 const ArtistHeader = ({
   artist,
