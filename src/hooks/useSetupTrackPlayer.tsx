@@ -1,14 +1,37 @@
+import {CrossfadeManager} from '@/native/CrossfadeManager';
 import {
   useIsStoreHydrated,
   useTracks,
   useTracksActions,
 } from '@/store/selectors';
 import {useEffect, useRef, useState} from 'react';
-import TrackPlayer, {RepeatMode} from 'react-native-track-player';
+import TrackPlayer, {
+  AppKilledPlaybackBehavior,
+  Capability,
+  Event,
+  RepeatMode,
+} from 'react-native-track-player';
 
 const setupPlayer = async () => {
   await TrackPlayer.setupPlayer({
     maxCacheSize: 1024 * 10,
+  });
+  await TrackPlayer.updateOptions({
+    android: {
+      appKilledPlaybackBehavior: AppKilledPlaybackBehavior.PausePlayback,
+    },
+    capabilities: [
+      Capability.Play,
+      Capability.Pause,
+      Capability.SkipToNext,
+      Capability.SkipToPrevious,
+      Capability.SeekTo,
+    ],
+    compactCapabilities: [
+      Capability.Play,
+      Capability.Pause,
+      Capability.SkipToNext,
+    ],
   });
   await TrackPlayer.setVolume(0.3);
   await TrackPlayer.setRepeatMode(RepeatMode.Queue);

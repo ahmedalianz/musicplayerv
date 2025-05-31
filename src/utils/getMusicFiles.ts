@@ -10,7 +10,7 @@ const getMusicFiles = async ({limit}: {limit?: number} = {}) => {
 
   const rawTracks = await getAll({
     coverQuality: 50,
-    limit,
+    limit: 50,
   });
 
   return Array.isArray(rawTracks) ? rawTracks.map(formatTrack) : [];

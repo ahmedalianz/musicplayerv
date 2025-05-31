@@ -1,3 +1,13 @@
 <resources>
-    <string name="app_name">musicplayerv</string>
+    <string name="app_name">Music Player</string>
+     <!-- Custom notification channel -->
+    <string name="rntp_channel_id">music_player_channel</string>
+    <string name="rntp_channel_name">Music Player</string>
+    <string name="playback_channel_name">Now Playing</string>
+    
+    <!-- Optional: Custom notification text -->
+    <string name="rntp_notification_playing">Playing</string>
+    <string name="rntp_notification_paused">Paused</string>
+    <string name="rntp_channel_type">rntp_channel_type_default</string>
+
 </resources>

@@ -36,8 +36,11 @@ export const createTracksSlice = (
   toggleTrackFavorite: (track: TrackV) =>
     set(state => {
       const trackIndex = state.favorites.findIndex(t => t.url === track.url);
-      if (trackIndex === -1) state.favorites.push(track);
-      else state.favorites.splice(trackIndex, 1);
+      if (trackIndex === -1) {
+        state.favorites.push(track);
+      } else {
+        state.favorites.splice(trackIndex, 1);
+      }
       return {favorites: state.favorites};
     }),
 });
