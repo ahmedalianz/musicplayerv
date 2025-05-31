@@ -13,7 +13,7 @@ type PlaylistListItemProps = {
 const PlaylistListItem = ({playlist}: PlaylistListItemProps) => {
   const navigation = useNavigation<InScreenNavigation>();
   const handlePlaylistPress = () => {
-    navigation.navigate('Playlist', {playlistName: playlist.name});
+    navigation.navigate('Playlist', {playlistName: playlist.playListName});
   };
   return (
     <TouchableHighlight activeOpacity={0.8} onPress={handlePlaylistPress}>
@@ -30,14 +30,14 @@ const PlaylistListItem = ({playlist}: PlaylistListItemProps) => {
 
         <View style={styles.playlistContainer}>
           <Text numberOfLines={1} style={styles.playlistNameText}>
-            {playlist.name}
+            {playlist.playListName}
           </Text>
 
           <Icon
             name="chevron-forward"
             size={16}
             color={Colors.icon}
-            style={{opacity: 0.5}}
+            style={styles.fainted}
           />
         </View>
       </View>
@@ -69,5 +69,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     width: '100%',
   },
+  fainted: {opacity: 0.5},
 });
 export default PlaylistListItem;

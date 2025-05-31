@@ -18,6 +18,7 @@ module.exports = {
         trailingComma: 'es5',
       },
     ],
+    'react/react-in-jsx-scope': 'off',
     // React Native specific rules
     'react-native/no-unused-styles': 'error',
     'react-native/no-inline-styles': 'warn',

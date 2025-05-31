@@ -2,7 +2,7 @@ import {getAll} from '@kingfang007/react-native-get-music-files';
 import requestStoragePermission from './requestStoragePermission';
 import {TrackV} from '@/types/TracksList.types';
 
-export const getMusicFiles = async ({limit}: {limit?: number} = {}) => {
+const getMusicFiles = async ({limit}: {limit?: number} = {}) => {
   const hasPermission = await requestStoragePermission();
   if (!hasPermission) {
     return [];
@@ -36,3 +36,4 @@ const formatTrack = (rawTrack: any): TrackV => ({
   duration: rawTrack.duration ?? 0,
   artwork: getArtworkUri(rawTrack),
 });
+export default getMusicFiles;

@@ -1,6 +1,6 @@
 import {MovingTextProps} from '@/types/PlayerControls.types';
 import React, {useEffect} from 'react';
-import {View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import Animated, {
   cancelAnimation,
   Easing,
@@ -42,11 +42,7 @@ const MovingText = ({
     <View style={style}>
       <Animated.Text
         numberOfLines={1}
-        style={[
-          shouldAnimate && {width: 999, paddingLeft: 16},
-          animatedText,
-          style,
-        ]}>
+        style={[shouldAnimate && styles.movingText, animatedText, style]}>
         {text}
       </Animated.Text>
     </View>
@@ -54,3 +50,7 @@ const MovingText = ({
 };
 
 export default MovingText;
+
+const styles = StyleSheet.create({
+  movingText: {width: 999, paddingLeft: 16},
+});

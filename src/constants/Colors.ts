@@ -9,6 +9,7 @@ const colors = {
   textMuted: '#9ca3af',
   icon: '#fff',
   placeholder: '#aaa',
+  lightMaximumTrackTintColor: 'rgba(255,255,255,0.2)',
   maximumTrackTintColor: 'rgba(255,255,255,0.4)',
   minimumTrackTintColor: 'rgba(255,255,255,0.6)',
 };

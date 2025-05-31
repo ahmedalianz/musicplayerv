@@ -19,9 +19,9 @@ const QueueControls = ({tracks, style, ...viewProps}: QueueControlsProps) => {
   };
 
   return (
-    <View style={[{flexDirection: 'row', columnGap: 16}, style]} {...viewProps}>
+    <View style={[styles.gap16, style]} {...viewProps}>
       {/* Play button */}
-      <View style={{flex: 1}}>
+      <View style={Styles.flexed}>
         <TouchableOpacity
           onPress={handlePlay}
           activeOpacity={0.8}
@@ -33,7 +33,7 @@ const QueueControls = ({tracks, style, ...viewProps}: QueueControlsProps) => {
       </View>
 
       {/* Shuffle button */}
-      <View style={{flex: 1}}>
+      <View style={Styles.flexed}>
         <TouchableOpacity
           onPress={handleShufflePlay}
           activeOpacity={0.8}
@@ -63,6 +63,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     textAlign: 'center',
   },
+  gap16: {flexDirection: 'row', columnGap: 16},
 });
 
 export default QueueControls;

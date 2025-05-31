@@ -1,44 +1,44 @@
 import {FontSize, Images, Styles} from '@/constants';
-import {Artist} from '@/types/Artist.types';
-import {TrackV} from '@/types/TracksList.types';
+import {Playlist, TrackV} from '@/types/TracksList.types';
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import FastImage from 'react-native-fast-image';
 import {QueueControls} from './TrackListComponents';
 
-const ArtistHeader = ({
-  artist,
-  filteredArtistTracks,
+const PlaylistHeader = ({
+  playlist,
+  filteredPlaylistTracks,
   search,
 }: {
-  artist: Artist;
-  filteredArtistTracks: TrackV[];
+  playlist: Playlist;
+  filteredPlaylistTracks: TrackV[];
   search: string;
 }) => {
   return (
     <View>
       <View style={styles.artworkImageContainer}>
         <FastImage
+          key={playlist?.artworkPreview ?? Images.unknownTrack}
           source={{
-            uri: Images.unknownArtist,
+            uri: playlist?.artworkPreview ?? Images.unknownTrack,
             priority: FastImage.priority.high,
           }}
-          style={styles.artistImage}
+          style={styles.playlistImage}
         />
       </View>
 
-      <Text numberOfLines={1} style={styles.artistNameText}>
-        {artist.name}
+      <Text numberOfLines={1} style={styles.playlistNameText}>
+        {playlist.playListName}
       </Text>
 
       {search.length === 0 && (
-        <QueueControls tracks={filteredArtistTracks} style={styles.pv24} />
+        <QueueControls tracks={filteredPlaylistTracks} style={styles.pv24} />
       )}
     </View>
   );
 };
 
-export default ArtistHeader;
+export default PlaylistHeader;
 
 const styles = StyleSheet.create({
   artworkImageContainer: {
@@ -46,13 +46,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     height: 200,
   },
-  artistImage: {
-    width: '60%',
+  playlistImage: {
     height: '100%',
     resizeMode: 'cover',
-    borderRadius: 128,
+    width: '100%',
   },
-  artistNameText: {
+  playlistNameText: {
     ...Styles.text,
     marginTop: 22,
     textAlign: 'center',

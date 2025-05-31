@@ -41,6 +41,7 @@ const ListHeaderComponent = ({
   const ITEM_HEIGHT = 50;
   const SCROLL_THRESHOLD = 3 * (ITEM_HEIGHT + 10);
   const [searchFocused, setSearchFocused] = useState(false);
+
   const headerStyle = useAnimatedStyle<TextStyle>(() => ({
     fontSize: interpolate(
       scrollY.value,
@@ -108,7 +109,7 @@ const ListHeaderComponent = ({
             {title}
           </Animated.Text>
           <MaterialCommunityIcon
-            style={{padding: 5}}
+            style={styles.refreshIcon}
             onPress={refetchSongs}
             name="refresh"
             size={20}
@@ -180,7 +181,7 @@ const styles = StyleSheet.create({
     gap: 5,
   },
   searchInput: {
-    backgroundColor: 'rgba(255,255,255,0.2)',
+    backgroundColor: Colors.lightMaximumTrackTintColor,
     color: Colors.text,
     borderRadius: 14,
     paddingHorizontal: 12,
@@ -193,6 +194,9 @@ const styles = StyleSheet.create({
     position: 'absolute',
     left: 12,
     top: 10,
+  },
+  refreshIcon: {
+    padding: 5,
   },
 });
 export default ListHeaderComponent;

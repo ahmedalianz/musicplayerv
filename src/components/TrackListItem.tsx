@@ -3,7 +3,7 @@ import {TracksListItemProps} from '@/types/TracksList.types';
 import {StyleSheet, Text, TouchableHighlight, View} from 'react-native';
 import FastImage from 'react-native-fast-image';
 import {useActiveTrack, useIsPlaying} from 'react-native-track-player';
-// import Icon from 'react-native-vector-icons/Entypo';
+import Icon from 'react-native-vector-icons/Entypo';
 import IonIcon from 'react-native-vector-icons/Ionicons';
 import {TrackShortcutsMenu} from './TrackListComponents';
 import React from 'react';
@@ -16,7 +16,7 @@ const TracksListItem = ({
   return (
     <View style={styles.trackItemContainer}>
       <TouchableHighlight
-        style={{flex: 1}}
+        style={Styles.flexed}
         onPress={() => handleTrackSelect(track)}
         accessibilityLabel={`Play ${track.title}`}
         accessibilityRole="button">
@@ -50,7 +50,7 @@ const TracksListItem = ({
               />
             ))}
           <View style={styles.trackInfoContainer}>
-            <View style={{width: '100%'}}>
+            <View style={Styles.w100}>
               <Text
                 numberOfLines={1}
                 style={{
@@ -69,12 +69,9 @@ const TracksListItem = ({
           </View>
         </View>
       </TouchableHighlight>
-      <View
-        style={{
-          paddingHorizontal: 5,
-        }}>
+      <View style={styles.ph5}>
         <TrackShortcutsMenu track={track}>
-          {/* <Icon name="dots-three-horizontal" size={18} color={Colors.icon} /> */}
+          <Icon name="dots-three-horizontal" size={18} color={Colors.icon} />
         </TrackShortcutsMenu>
       </View>
     </View>
@@ -124,6 +121,9 @@ const styles = StyleSheet.create({
     color: Colors.textMuted,
     fontSize: 14,
     marginTop: 4,
+  },
+  ph5: {
+    paddingHorizontal: 5,
   },
 });
 export default TracksListItem;

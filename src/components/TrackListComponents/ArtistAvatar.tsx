@@ -24,7 +24,7 @@ const ArtistAvatar = ({artist}: {artist: Artist}) => {
           />
         </View>
 
-        <View style={{width: '100%'}}>
+        <View style={Styles.w100}>
           <Text numberOfLines={1} style={styles.artistNameText}>
             {artist?.name}
           </Text>

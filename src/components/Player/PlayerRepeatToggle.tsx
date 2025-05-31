@@ -34,7 +34,7 @@ const PlayerRepeatToggle = ({
   return (
     <View style={style}>
       <Icon
-        name={repeatIcon[repeatMode]}
+        name={repeatIcon[repeatMode || repeatOrder.Off]}
         size={size}
         color={Colors.icon}
         style={style}

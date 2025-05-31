@@ -1,9 +1,10 @@
+import {TrackV} from '@/types/TracksList.types';
+import {PropsWithChildren} from 'react';
 import {View} from 'react-native';
 
-// type TrackShortcutsMenuProps = PropsWithChildren<{track: TrackV}>;
+type TrackShortcutsMenuProps = PropsWithChildren<{track: TrackV}>;
 
-// const TrackShortcutsMenu = ({track, children}: TrackShortcutsMenuProps) => {
-const TrackShortcutsMenu = () => {
+const TrackShortcutsMenu = ({track, children}: TrackShortcutsMenuProps) => {
   // const navigation = useNavigation<InScreenNavigation>();
 
   // const isFavorite = track.rating === 1;
@@ -45,7 +46,7 @@ const TrackShortcutsMenu = () => {
   // };
 
   return (
-    <View></View>
+    <View>{children}</View>
     // <MenuView
     //   onPressAction={({nativeEvent: {event}}) => handlePressAction(event)}
     //   actions={[
@@ -58,7 +59,6 @@ const TrackShortcutsMenu = () => {
     //       title: 'Add to playlist',
     //     },
     //   ]}>
-    //   {children}
     // </MenuView>
   );
 };

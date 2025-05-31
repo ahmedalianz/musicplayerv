@@ -6,7 +6,6 @@ import RootLayout from './Layout';
 import Splash from './Splash';
 import {Styles} from './src/constants';
 import useSetupTrackPlayer from './src/hooks/useSetupTrackPlayer';
-import React from 'react';
 function App() {
   const isDarkMode = useColorScheme() === 'dark';
   const {loading, progress} = useSetupTrackPlayer();

@@ -71,9 +71,6 @@ jest.mock('@kingfang007/react-native-get-music-files', () => ({
   getMusicFiles: jest.fn(() => Promise.resolve([])),
 }));
 
-// Mock react-native-linear-gradient
-jest.mock('react-native-linear-gradient', () => 'LinearGradient');
-
 // Mock react-native-fast-image
 jest.mock('react-native-fast-image', () => 'FastImage');
 
